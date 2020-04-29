@@ -1,1 +1,21 @@
-<p>login works!</p>
+<div class="container ">
+    <div class="box has-text-cenered">
+        <h1 class="title is-1">Word rush</h1>
+        <br>
+        <h3 class="title is-3">Login</h3>
+        <br>
+        <input 
+            class="input is-rounded is-large" 
+            type="text" 
+            placeholder="Choose your name"
+            [(ngModel)]="name"    
+        >
+        <br>
+        <br>
+        <div class="level">
+            <div class="level-item">
+                <button class="button is-success is-large" (click)=login()>Play</button>
+            </div>
+        </div>
+    </div>
+</div>
