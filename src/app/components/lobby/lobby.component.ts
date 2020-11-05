@@ -38,7 +38,7 @@ export class LobbyComponent implements OnInit {
   }
 
   hostGame(): void {
-    this.ws.hostGame();
+    this.ws.hostGame('VERSUS');
   }
 
   goToRoom(id): void {

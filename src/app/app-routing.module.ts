@@ -4,6 +4,7 @@ import { LoginComponent } from './components/login/login.component';
 import { LobbyComponent } from './components/lobby/lobby.component';
 import { AuthGuard } from './services/auth.guard';
 import { RoomComponent } from './components/room/room.component';
+import { GameComponent } from './components/game/game.component';
 
 const routes: Routes = [
   {
@@ -19,6 +20,11 @@ const routes: Routes = [
     path: 'room/:id',
     canActivate: [AuthGuard],
     component: RoomComponent,
+  },
+  {
+    path: 'game/:id',
+    canActivate: [AuthGuard],
+    component: GameComponent,
   }
 ];
 

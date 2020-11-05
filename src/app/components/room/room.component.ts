@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Game } from 'src/app/models/game';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { SocketHandlerService } from 'src/app/services/socket-handler.service';
 
@@ -17,6 +17,7 @@ export class RoomComponent implements OnInit {
     private route: ActivatedRoute,
     private auth: AuthService,
     private ws: SocketHandlerService,
+    private router: Router,
   ) { }
 
   ngOnInit(): void {
@@ -37,7 +38,19 @@ export class RoomComponent implements OnInit {
     return (this.game && this.game.players.includes(this.auth.getName()));
   }
 
+  leaveRoom(): void {
+    this.ws.leaveRoom(this.route.snapshot.paramMap.get('id'));
+  }
+
   joinRoom(): void {
     this.ws.joinRoom(this.route.snapshot.paramMap.get('id'));
+  }
+
+  startGame(): void {
+    this.ws.startGame(this.game.id);
+  }
+
+  handleStartGame(game: Game): void {
+    this.router.navigate(['/game', game.id]);    
   }
 }

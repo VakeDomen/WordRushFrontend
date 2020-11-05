@@ -51,6 +51,7 @@ export class SocketHandlerService {
     this.ws.listen('LOBBY_GAMES').subscribe((resp: Game[]) => this.handleGames(resp));
     this.ws.listen('LOBBY_GAME').subscribe((resp: Game) => this.setRoom(resp));
     this.ws.listen('LOBBY_JOIN_GAME').subscribe((resp: Game) => this.setRoom(resp));
+    this.ws.listen('LOBBY_START_GAME').subscribe((resp: Game) => this.handleStartGame(resp));
   }
 
   private gamesContext;
@@ -61,12 +62,11 @@ export class SocketHandlerService {
   handleGames(games: Game[]): void {
     this.gamesContext.handleGames(games);
   }
-  hostGame(): void {
-    this.ws.emit('LOBBY_HOST_GAME', null);
+  hostGame(mode: string): void {
+    this.ws.emit('LOBBY_HOST_GAME', mode);
   }
   private roomContext;
   getRoom(id: string, context: any): void {
-    console.log(id);
     this.roomContext = context;
     this.ws.emit('LOBBY_GAME', id);
   }
@@ -76,7 +76,16 @@ export class SocketHandlerService {
   joinRoom(id: string): void {
     this.ws.emit('LOBBY_JOIN_GAME', id);
   }
-  
+  leaveRoom(id: string): void {
+    this.ws.emit('LOBBY_LEAVE_GAME', id);
+  }
+  startGame(id: string): void {
+    this.ws.emit('LOBBY_START_GAME', id);
+  }
+  handleStartGame(game: Game): void {
+    this.toastr.success('Host ' + game.host + ' starting the game!');
+    this.roomContext.handleStartGame(game);
+  }
 
   // ------------------ game ------------------
   initGame(): void {

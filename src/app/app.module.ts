@@ -10,13 +10,15 @@ import { LoginComponent } from './components/login/login.component';
 import { ToastrModule } from 'ngx-toastr';
 import { LobbyComponent } from './components/lobby/lobby.component';
 import { RoomComponent } from './components/room/room.component';
+import { GameComponent } from './components/game/game.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     LobbyComponent,
-    RoomComponent
+    RoomComponent,
+    GameComponent
   ],
   imports: [
     BrowserModule,
